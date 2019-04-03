@@ -1,0 +1,10 @@
+{
+
+"fred":{"api-key": "some-key"},
+
+"tweepy":{"consumer-token": "some-token",
+          "consumer-secret": "some-secret",
+          "access-token": "some-token",
+          "access-secret": "some-secret"}
+
+}
