@@ -19,13 +19,17 @@ First step is to create one and install all necessary project requirements.
     ~ $ virtualenv env --python=python3
     ~ $ source env/bin/activate
     ~ $ pip install -r requirements.txt
+    
+### Configuration file
+
+You should open _config.json_ file and edit it with your fred and tweepy api key credentials. 
 
 ## Execution
 
     ~ $ cd scripts
     ~ $ python main.py [--date_init some-date]
     
-Optionaly, you can set the backtesting initial date as an argument. If not, a dates is set by default.
+Optionaly, you can set the backtesting initial date as an argument. If not, a date is set by default.
 
 For example:
 
