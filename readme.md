@@ -8,7 +8,7 @@ It is for made for litecoin prediction but it can be easily edited to other cryp
 
 ### Clone repository
 
-    ~ $ git clone 
+    ~ $ git clone https://github.com/philipiv/cryptocurrency-trading-with-sentiment-analysis.git
     ~ $ cd cryptocurrency-trading-with-sentiment-analysis
 
 ### Project requirements 
