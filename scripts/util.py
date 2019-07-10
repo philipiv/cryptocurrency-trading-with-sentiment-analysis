@@ -1,10 +1,12 @@
+import json
+
 import pandas as pd
 import numpy as np
-import json
+
 
 def get_config(config_file):
 
-    '''
+    """
     This function loads configuration file with all necessary api keys into memory.
 
     input:
@@ -12,7 +14,7 @@ def get_config(config_file):
 
     output:
         - config: dictionary containing configuration file
-    '''
+    """
 
     with open(config_file) as json_file:
         config = json.load(json_file)
@@ -21,7 +23,7 @@ def get_config(config_file):
 
 
 def get_signal_norm_dates(signal_, index):
-    '''
+    """
     This function takes a time series and an index and creates a new time series
     with the former information into the given index.
     As new index may contain more dates, interpolation may be needed.
@@ -32,7 +34,7 @@ def get_signal_norm_dates(signal_, index):
 
     output:
         - signal: time series from input expressed into new index
-    '''
+    """
 
     signal = pd.Series(index=index)
 
@@ -42,9 +44,9 @@ def get_signal_norm_dates(signal_, index):
     return signal
 
 
-def get_sentiment(index,query,tweepy_keys):
+def get_sentiment(index, query, tweepy_keys):
 
-    '''
+    """
     This function computes the sentiment analysis for the given date range.
 
     input:
@@ -53,7 +55,7 @@ def get_sentiment(index,query,tweepy_keys):
 
     output:
         - sentiment: pandas Series with sentiment analysis
-    '''
+    """
 
     from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
     import tweepy
@@ -67,7 +69,7 @@ def get_sentiment(index,query,tweepy_keys):
 
     for date in index:
 
-        date_plus_one=date +pd.Timedelta(days=1)
+        date_plus_one = date + pd.Timedelta(days=1)
 
         searchtweets = api.search(q=query, count=100,
                                   lang="en",
@@ -76,7 +78,7 @@ def get_sentiment(index,query,tweepy_keys):
                                   tweet_mode='extended')
 
         sentences=[]
-        for result in (searchtweets):
+        for result in searchtweets:
 
             sentences.append(result.full_text)
         
@@ -85,8 +87,8 @@ def get_sentiment(index,query,tweepy_keys):
         for sentence in sentences:
             vs = vs + analyzer.polarity_scores(sentence)['compound']
 
-        if np.shape(sentences)[0]!=0: vs = vs / np.shape(sentences)[0]
+        if np.shape(sentences)[0] != 0: vs = vs / np.shape(sentences)[0]
 
-        sentiment[date]=vs
+        sentiment[date] = vs
 
     return sentiment
